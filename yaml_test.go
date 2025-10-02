@@ -113,17 +113,17 @@ func unmarshal(t *testing.T, y []byte, s, e interface{}) {
 func TestUnmarshalStrict(t *testing.T) {
 	y := []byte("a: 1\nb: 2")
 	s1 := UnmarshalString{}
-	f1 := "error parsing document: field in document is not recognized or is in the wrong location: b"
+	f1 := "error parsing document: json: unknown field \"b\""
 	unmarshalStrict(t, y, &s1, f1)
 
 	y = []byte("a: 1\nb: 2\nc: foo\nd: 123\ne: baz\nff: bar\nqq: baz")
 	s1 = UnmarshalString{}
-	f1 = "error parsing document: fields in document are not recognized or are in the wrong location: b, c, d, e (+ 2 more)"
+	f1 = "error parsing document: json: unknown field \"b\""
 	unmarshalStrict(t, y, &s1, f1)
 
 	y = []byte("a: 1\nb: 2\nc: foo\nd: 123")
 	s1 = UnmarshalString{}
-	f1 = "error parsing document: fields in document are not recognized or are in the wrong location: b, c, d"
+	f1 = "error parsing document: json: unknown field \"b\""
 	unmarshalStrict(t, y, &s1, f1)
 
 	y = []byte("a: 1")
